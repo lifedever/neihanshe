@@ -1,0 +1,54 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="neihanshe.ItemPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="clr-namespace:neihanshe.common"
+    xmlns:cache="clr-namespace:b_wind.WindowsPhone.Cache;assembly=CacheNetworkFile"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Landscape"
+    mc:Ignorable="d"
+    Style="{StaticResource TransitionPageStyle}"
+
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <common:UserAvatarConvert x:Key="UserAvatarConvert" />
+        <common:ImageConvert x:Key="ImageConvert" />
+        <cache:CacheNetworkImageConvert x:Key="CacheImageConvert1" />
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Image RenderTransformOrigin="0,0"
+               Name="ImgZoom"
+               Source="{Binding ArticleItem.PicUrl, Converter={StaticResource ImageConvert}}">
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener
+                    PinchStarted="OnPinchStarted"
+                    PinchDelta="OnPinchDelta"
+                    DragDelta="OnDragDelta"
+                    DoubleTap="OnDoubleTap" />
+            </toolkit:GestureService.GestureListener>
+            <Image.RenderTransform>
+                <CompositeTransform
+                    ScaleX="1" ScaleY="1"
+                    TranslateX="0" TranslateY="0" />
+            </Image.RenderTransform>
+        </Image>
+
+    </Grid>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/save.png" 
+                                            Click="SaveApplicationBarIconButton_OnClick"
+                                            Text="保存图片">
+                
+            </shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+</phone:PhoneApplicationPage>

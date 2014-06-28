@@ -1,0 +1,113 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="neihanshe.WebBrowserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Landscape"
+    Style="{StaticResource TransitionPageStyle}"
+
+    shell:SystemTray.IsVisible="False" Loaded="WebBrowserPage_OnLoaded">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="DiaosbookPivotStyle" TargetType="phone:Pivot">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="phone:Pivot">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Background="#FF2B579A" CacheMode="BitmapCache" Grid.RowSpan="2" />
+
+                            <Grid Background="{TemplateBinding Background}"
+                                  CacheMode="BitmapCache"
+                                  Grid.Row="2" />
+
+                            <ContentPresenter Grid.Row="0"
+                                              ContentTemplate="{TemplateBinding TitleTemplate}"
+                                              Content="{TemplateBinding Title}"
+                                              Margin="17,10,0,7" />
+
+                            <primitives:PivotHeadersControl
+                                x:Name="HeadersListElement"
+                                Grid.Row="1" Margin="-3,0,0,20" />
+
+                            <ItemsPresenter x:Name="PivotItemPresenter"
+                                            Margin="{TemplateBinding Padding}"
+                                            Grid.Row="2" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#BBBBBC">
+        <!--枢轴控件-->
+        <phone:Pivot Margin="-10 0 0 -70" Title="内涵社非官方WP8版"
+                     Name="MyPivot"
+                     Style="{StaticResource DiaosbookPivotStyle}">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"
+                               Foreground="White"
+                               FontSize="36" />
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <!--枢轴项一-->
+            <phone:PivotItem Header="首页">
+                <Grid>
+                    <phone:WebBrowser Margin="0 -30 0 0" Navigating="Browser_OnNavigating"
+                                      Navigated="Browser_OnNavigated" NavigationFailed="Browser_OnNavigationFailed"
+                                      IsScriptEnabled="True" Name="IndexBrowser" />
+                </Grid>
+            </phone:PivotItem>
+
+            <!--枢轴项二-->
+            <phone:PivotItem Header="热门">
+                <Grid>
+                    <phone:WebBrowser Margin="0 -30 0 0" Navigating="Browser_OnNavigating"
+                                      Navigated="Browser_OnNavigated" IsScriptEnabled="True" Name="HotBrowser" />
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="最新">
+                <Grid>
+                    <phone:WebBrowser Margin="0 -30 0 0" Navigating="Browser_OnNavigating"
+                                      Navigated="Browser_OnNavigated" IsScriptEnabled="True" Name="NewBrowser" />
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+        <ProgressBar Height="10" Name="WebProgressBar" Visibility="Collapsed" IsIndeterminate="True"
+                     Foreground="#FF2B579A" />
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized" BackgroundColor="#FF2B579A" Opacity="0.85">
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/back.png"
+                                            Click="BackApplicationBarIconButton_OnClick"
+                                            Text="后退" />
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/refresh.png"
+                                            Click="ApplicationBarIconButton_OnClick"
+                                            Text="刷新" />
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/next.png"
+                                            Text="前进"
+                                            Click="ForwardApplicationBarIconButton_OnClick" />
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="APP模式" Click="ApplicationBarMenuItem_OnClick" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
