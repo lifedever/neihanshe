@@ -11,6 +11,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
+    shell:SystemTray.BackgroundColor="#FF2B579A"
     SupportedOrientations="Portrait" 
     mc:Ignorable="d"
     Style="{StaticResource TransitionPageStyle}"
@@ -21,7 +22,7 @@
         <common:ImageConvert x:Key="ImageConvert" />
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#BBBBBC">
         <Image RenderTransformOrigin="0,0"
                Name="ImgZoom"
                Source="{Binding ArticleItem.PicUrl, Converter={StaticResource ImageConvert}}">
@@ -40,13 +41,10 @@
         </Image>
 
     </Grid>
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Minimized">
-            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/save.png" 
-                                            Click="SaveApplicationBarIconButton_OnClick"
-                                            Text="保存图片">
-                
-            </shell:ApplicationBarIconButton>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar BackgroundColor="#FF2B579A" Opacity="0.85">
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/save.png" Text="保存" Click="Save_btnClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/share.png" Text="分享到微信" Click="ShareWeiXin_btnClick"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

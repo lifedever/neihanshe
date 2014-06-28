@@ -1,15 +1,23 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
+using Coding4Fun.Toolkit.Controls;
+using MicroMsg.sdk;
 using Microsoft.Phone.Controls;
+using Microsoft.Xna.Framework.Media;
 using neihanshe.common;
 
 namespace neihanshe
 {
     public partial class ItemPage : PhoneApplicationPage, INotifyPropertyChanged
     {
+        public const string APPID = "wxd930ea5d5a258f4f";//sdk_demo的appid
         public static ArticleItem StaticArticleItem;
         private ArticleItem _articleItem;
 
@@ -44,10 +52,7 @@ namespace neihanshe
             }
         }
 
-        private void SaveApplicationBarIconButton_OnClick(object sender, EventArgs e)
-        {
-        }
-
+       
         # region 双指缩放
 
         // these two fields fully define the zoom state:
@@ -237,6 +242,78 @@ namespace neihanshe
 
         #endregion
 
+       
+
         #endregion
+        private void ShareWeiXin_btnClick(object sender, EventArgs e)
+        {
+
+            string AppID = APPID;
+            int scene = SendMessageToWX.Req.WXSceneChooseByUser;//发送到朋友圈
+            WXBaseMessage message = null;
+            WXImageMessage msg = new WXImageMessage();
+            msg.Title = "来自内涵社的图片";
+            msg.Description = ArticleItem.Title;
+            msg.ThumbData = readRes(100, 200, 85);
+            //图片的byte[]数据
+            msg.ImageData = readRes();
+
+            //图片的网络链接，ImageUrl和ImageData二者取其一，不要同时都填值
+
+            message = msg;
+
+            SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
+            IWXAPI api = WXAPIFactory.CreateWXAPI(AppID);
+
+            api.SendReq(req);
+        }
+        //工具函数，读取res资源成byte数组
+        private byte[] readRes()
+        {
+            BitmapImage imageSource = ImgZoom.Source as BitmapImage;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                try
+                {
+                    WriteableBitmap btmMap = new WriteableBitmap(imageSource);
+                    // write an image into the stream
+                    Extensions.SaveJpeg(btmMap, ms, imageSource.PixelWidth, imageSource.PixelHeight, 0, 100);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return ms.ToArray();
+            }
+        }
+        private byte[] readRes(int w, int h, int q)
+        {
+            BitmapImage imageSource = ImgZoom.Source as BitmapImage;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                try
+                {
+                    WriteableBitmap btmMap = new WriteableBitmap(imageSource);
+                    // write an image into the stream
+                    Extensions.SaveJpeg(btmMap, ms, w, h, 0, q);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return ms.ToArray();
+            }
+        }
+        private void Save_btnClick(object sender, EventArgs e)
+        {
+            var libary = new MediaLibrary();
+            libary.SavePicture(Guid.NewGuid() + ".png", readRes());
+            ToastPrompt toast = new ToastPrompt();
+            toast.Title = "恭喜：";
+            toast.Message = "图像保存成功！";
+            toast.Show();
+        }
     }
 }
