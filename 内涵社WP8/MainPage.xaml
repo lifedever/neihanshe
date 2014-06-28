@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="clr-namespace:neihanshe.common"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:cache="clr-namespace:b_wind.WindowsPhone.Cache;assembly=CacheNetworkFile"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -48,7 +47,6 @@
 
         <common:UserAvatarConvert x:Key="UserAvatarConvert" />
         <common:ImageConvert x:Key="ImageConvert" />
-        <cache:CacheNetworkImageConvert x:Key="CacheImageConvert1" />
         <Style TargetType="ListBoxItem" x:Key="ContainerStyle">
             <Setter Property="Opacity" Value="0.5" />
             <Setter Property="Opacity" Value="0.5" />
@@ -181,7 +179,6 @@
 
             <!--数据列表开始-->
             <ListBox Grid.Row="1" ItemsSource="{Binding ArticleItems}"
-                     SelectionChanged="MyLongListSelector_OnSelectionChanged"
                      Margin="0 0 0 70"
                      Name="MyLongListSelector">
                 <ListBox.ItemTemplate>
@@ -246,11 +243,12 @@
                                                    VerticalAlignment="Center" FontSize="18" Text="{Binding Dn}" />
                                     </Grid>
 
-                                    <Image Grid.Column="1"
-                                           Tap="CMTUIElement_OnTap"
-                                           Tag="{Binding Id}"
-                                           Source="Assets/cmt.png" Width="36" Height="36" VerticalAlignment="Center"
-                                           Margin="0 0 20 0" HorizontalAlignment="Right" />
+                                    <StackPanel Grid.Column="1" Margin="0 0 20 0"  VerticalAlignment="Center" HorizontalAlignment="Right"  Orientation="Horizontal">
+                                        <Image Tag="{Binding Id}" Tap="CMTUIElement_OnTap"
+                                               Source="Assets/cmt.png" Width="36" Height="36"
+                                              />
+                                        <TextBlock Text="{Binding Cmt}" Foreground="Black" Margin="10 0 0 0"></TextBlock>
+                                    </StackPanel>
 
                                 </Grid>
                             </Grid>

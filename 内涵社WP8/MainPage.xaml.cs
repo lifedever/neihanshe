@@ -466,10 +466,7 @@ namespace neihanshe
         }
 
 
-        private void MyLongListSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MyLongListSelector.SelectedIndex = -1;
-        }
+     
 
         private void AboutBrowserModeMenuItem_Click(object sender, EventArgs e)
         {

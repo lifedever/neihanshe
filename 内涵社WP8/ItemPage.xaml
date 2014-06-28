@@ -7,12 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:common="clr-namespace:neihanshe.common"
-    xmlns:cache="clr-namespace:b_wind.WindowsPhone.Cache;assembly=CacheNetworkFile"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Landscape"
+    SupportedOrientations="Portrait" 
     mc:Ignorable="d"
     Style="{StaticResource TransitionPageStyle}"
 
@@ -20,7 +19,6 @@
     <phone:PhoneApplicationPage.Resources>
         <common:UserAvatarConvert x:Key="UserAvatarConvert" />
         <common:ImageConvert x:Key="ImageConvert" />
-        <cache:CacheNetworkImageConvert x:Key="CacheImageConvert1" />
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
