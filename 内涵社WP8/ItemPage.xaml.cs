@@ -315,5 +315,10 @@ namespace neihanshe
             toast.Message = "图像保存成功！";
             toast.Show();
         }
+
+        private void ApplicationBarIconButton_OnClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Page1.xaml?url=" + ArticleItem.PicUrl, UriKind.RelativeOrAbsolute));
+        }
     }
 }
