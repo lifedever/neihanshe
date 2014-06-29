@@ -18,33 +18,22 @@
 
     shell:SystemTray.IsVisible="True">
     <phone:PhoneApplicationPage.Resources>
-        <common:UserAvatarConvert x:Key="UserAvatarConvert" />
         <common:ImageConvert x:Key="ImageConvert" />
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="#BBBBBC">
-        <Image RenderTransformOrigin="0,0"
+        <Image RenderTransformOrigin="0,0" Visibility="Collapsed"
                Name="ImgZoom"
                Source="{Binding ArticleItem.PicUrl, Converter={StaticResource ImageConvert}}">
-            <toolkit:GestureService.GestureListener>
-                <toolkit:GestureListener
-                    PinchStarted="OnPinchStarted"
-                    PinchDelta="OnPinchDelta"
-                    DragDelta="OnDragDelta"
-                    DoubleTap="OnDoubleTap" />
-            </toolkit:GestureService.GestureListener>
-            <Image.RenderTransform>
-                <CompositeTransform
-                    ScaleX="1" ScaleY="1"
-                    TranslateX="0" TranslateY="0" />
-            </Image.RenderTransform>
         </Image>
-
+        <phone:WebBrowser IsScriptEnabled="True" Background="#BBBBBC" Name="ImageBrowser" Margin="0 0 0 75">
+            
+        </phone:WebBrowser>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar BackgroundColor="#FF2B579A" Opacity="0.85">
             <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/save.png" Text="保存" Click="Save_btnClick"></shell:ApplicationBarIconButton>
-            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/share.png" Text="分享到微信" Click="ShareWeiXin_btnClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/share.png" Text="分享到微信" Click="WaitShareWeiXin_btnClick"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

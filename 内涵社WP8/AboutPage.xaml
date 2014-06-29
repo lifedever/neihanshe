@@ -35,6 +35,12 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBlock Style="{StaticResource PhoneTextSubtleStyle}">
+                    版本号
+                </TextBlock>
+                <TextBlock Style="{StaticResource PhoneTextBlockBase}">
+                    1.0.0.1
+                </TextBlock>
+                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}">
                     声明
                 </TextBlock>
                 <TextBlock Style="{StaticResource PhoneTextBlockBase}">

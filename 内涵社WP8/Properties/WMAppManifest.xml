@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="zh-CN" />
-  <App xmlns="" ProductID="{2b02844f-0c29-44a8-a091-025b7229b0b9}" Title="内涵社WP8" RuntimeType="Silverlight"
-       Version="1.0.0.0" Genre="apps.normal" Author="gefangshuai" Description="内涵社windows phone 平台第三方客户端"
-       Publisher="gefangshuai" PublisherID="{7105d584-79cd-4d33-aa04-43f607d94d2e}">
+  <App xmlns="" ProductID="{2b02844f-0c29-44a8-a091-025b7229b0b9}" Title="内涵社WP8" RuntimeType="Silverlight" Version="1.0.0.1" Genre="apps.normal" Author="gefangshuai" Description="内涵社windows phone 平台第三方客户端" Publisher="gefangshuai" PublisherID="{7105d584-79cd-4d33-aa04-43f607d94d2e}">
     <IconPath IsRelative="true" IsResource="false">logo.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

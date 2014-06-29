@@ -214,7 +214,7 @@
                                 <TextBlock Grid.Row="0" TextWrapping="Wrap" Foreground="Black" FontSize="20"
                                            Margin="12" Text="{Binding Title}" />
                                 <Image Grid.Row="1" Tap="UIElement_OnTap" Height="{Binding PicH}" Stretch="None"
-                                       MaxHeight="2400" Width="{Binding PicW}"
+                                       MaxHeight="2000" Width="{Binding PicW}"
                                        Source="{Binding PicUrl, Converter={StaticResource ImageConvert}}" />
                                 <Grid Height="60" Grid.Row="2">
                                     <Grid.ColumnDefinitions>
