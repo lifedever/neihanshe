@@ -434,9 +434,17 @@ namespace neihanshe
             MyLongListSelector.IsEnabled = false;
             isCmt = true;
             var img = sender as Image;
-            CmtBrowser.Navigate(new Uri(string.Format("http://m.neihanshe.cn/apps/comment.php?id={0}", img.Tag),
-                UriKind.Absolute));
+            CmtBrowser.Navigate(new Uri(string.Format("http://neihanshe.cn/apps/comment.php?id={0}", img.Tag),UriKind.Absolute));
+            CmtBrowser.Navigating += CmtBrowser_Navigating;
             CMTStoryboardBegin.Begin();
+        }
+
+        void CmtBrowser_Navigating(object sender, NavigatingEventArgs e)
+        {
+            if (!e.Uri.AbsolutePath.StartsWith("/apps/comment.php"))
+            {
+                e.Cancel = true;
+            }
         }
 
         private void CloseCmtTap(object sender, GestureEventArgs e)
@@ -458,5 +466,7 @@ namespace neihanshe
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.RelativeOrAbsolute));
         }
+
+       
     }
 }

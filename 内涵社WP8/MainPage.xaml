@@ -264,7 +264,7 @@
 
         <Grid VerticalAlignment="Bottom" Background="White" Height="500" Name="CmtGrid">
 
-            <phone:WebBrowser Name="CmtBrowser" Margin="10 15 10 60" />
+            <phone:WebBrowser Name="CmtBrowser" Margin="10 15 10 60" IsScriptEnabled="False"/>
             <Image VerticalAlignment="Top" Width="45" Margin="10" HorizontalAlignment="Right"
                    Tap="CloseCmtTap"
                    Source="Assets/Icons/Light/close.png" />
@@ -299,7 +299,6 @@
                                               Text="全屏模式" />
                 <shell:ApplicationBarMenuItem Click="WebBrowserModeMenuItem_Click" Text="浏览器模式" />
                 <shell:ApplicationBarMenuItem Click="AboutBrowserModeMenuItem_Click" Text="关于" />
-
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
