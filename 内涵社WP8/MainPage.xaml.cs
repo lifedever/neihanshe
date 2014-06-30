@@ -19,7 +19,7 @@ namespace neihanshe
         private static string type = TypeUtils.HOT;
         public static int page = 1;
         private static string postUrl = "http://neihanshe.cn/apps/get_json.php?class={0}&page={1}";
-
+        private static string cmtUrl;
         public bool IsLoading = false;
         public ScrollViewer ListScrollViewer;
         private ObservableCollection<ArticleItem> _articleItems;
@@ -434,9 +434,24 @@ namespace neihanshe
             MyLongListSelector.IsEnabled = false;
             isCmt = true;
             var img = sender as Image;
-            CmtBrowser.Navigate(new Uri(string.Format("http://neihanshe.cn/apps/comment.php?id={0}", img.Tag),UriKind.Absolute));
-            CmtBrowser.Navigating += CmtBrowser_Navigating;
+
+            cmtUrl = string.Format("http://neihanshe.cn/apps/comment.php?id={0}", img.Tag);
+
+            CmtBrowser_Nav();
             CMTStoryboardBegin.Begin();
+        }
+
+        private void CmtBrowser_Nav()
+        {
+            CmtProgressBar.Visibility = Visibility.Visible;
+            //string tempStr = "<html><head><meta charset=\"utf-8\"></head><body><div align=\"center\" style=\"margin-top:100px;\"><h1>正在加载……</h1></div></body></html>";
+            //CmtBrowser.NavigateToString(tempStr);
+            CmtBrowser.Navigate(new Uri(cmtUrl, UriKind.Absolute));
+            CmtBrowser.Navigating += CmtBrowser_Navigating;
+            CmtBrowser.Navigated += (sender, args) =>
+            {
+                CmtProgressBar.Visibility = Visibility.Collapsed;
+            };
         }
 
         void CmtBrowser_Navigating(object sender, NavigatingEventArgs e)
@@ -465,6 +480,11 @@ namespace neihanshe
         private void AboutBrowserModeMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void RefreshCmtTap(object sender, GestureEventArgs e)
+        {
+            CmtBrowser_Nav();
         }
 
        

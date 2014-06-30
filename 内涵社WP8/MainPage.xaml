@@ -263,14 +263,23 @@
         </Grid>
 
         <Grid VerticalAlignment="Bottom" Background="White" Height="500" Name="CmtGrid">
+            <ProgressBar IsIndeterminate="True" Name="CmtProgressBar" Visibility="Collapsed"/>
 
-            <phone:WebBrowser Name="CmtBrowser" Margin="10 15 10 60" IsScriptEnabled="False"/>
-            <Image VerticalAlignment="Top" Width="45" Margin="10" HorizontalAlignment="Right"
-                   Tap="CloseCmtTap"
-                   Source="Assets/Icons/Light/close.png" />
-            <Image VerticalAlignment="Top" Width="45" Margin="10" HorizontalAlignment="Right"
-                   Tap="CloseCmtTap"
-                   Source="Assets/Icons/Light/basecircle.png" />
+            <phone:WebBrowser Name="CmtBrowser" Margin="10 15 10 70" IsScriptEnabled="False"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                <Grid Tap="RefreshCmtTap">
+                    <Image VerticalAlignment="Top" Width="45" Margin="10"
+                           Source="Assets/Icons/Light/refresh.png" />
+                    <Image VerticalAlignment="Top" Width="45" Margin="10"
+                           Source="Assets/Icons/Light/basecircle.png" />
+                </Grid>
+                <Grid Tap="CloseCmtTap">
+                    <Image VerticalAlignment="Top" Width="45" Margin="10 0"
+                           Source="Assets/Icons/Light/close.png" />
+                    <Image VerticalAlignment="Top" Width="45" Margin="10 0"
+                           Source="Assets/Icons/Light/basecircle.png" />
+                </Grid>
+            </StackPanel>
             <Grid.Projection>
                 <PlaneProjection LocalOffsetY="500" x:Name="CmTransform" />
             </Grid.Projection>
