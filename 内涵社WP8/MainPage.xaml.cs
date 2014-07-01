@@ -103,9 +103,12 @@ namespace neihanshe
         private void Slide()
         {
             MyLongListSelector.IsEnabled = false;
-            LayoutBack.Visibility = Visibility.Visible;
             SlideStoryboardBegin.Begin();
             _slided = true;
+            SlideStoryboardBegin.Completed += (sender, args) =>
+            {
+                SlideDoubleAnimationBegin.From = 0;
+            };
         }
 
         /// <summary>
@@ -116,6 +119,10 @@ namespace neihanshe
             MyLongListSelector.IsEnabled = true;
             SlideStoryboardEnd.Begin();
             _slided = false;
+            SlideStoryboardEnd.Completed += (sender, args) =>
+            {
+                SlideDoubleAnimationEnd.From = 400;
+            };
         }
 
 
@@ -487,6 +494,26 @@ namespace neihanshe
             CmtBrowser_Nav();
         }
 
-       
+
+        private void GestureListener_OnDragDelta(object sender, DragDeltaGestureEventArgs e)
+        {
+            if (e.HorizontalChange >= 0 && e.HorizontalChange <=400) { 
+                SlidePlaneProjection.LocalOffsetX = e.HorizontalChange;
+            }
+        }
+
+        private void GestureListener_OnDragCompleted(object sender, DragCompletedGestureEventArgs e)
+        {
+            if (SlidePlaneProjection.LocalOffsetX <= 200) //左滑
+            {
+                SlideDoubleAnimationEnd.From = SlidePlaneProjection.LocalOffsetX;
+                UnSlide();
+            }
+            else // 右滑
+            {
+                SlideDoubleAnimationBegin.From = SlidePlaneProjection.LocalOffsetX;
+                Slide();
+            }
+        }
     }
 }

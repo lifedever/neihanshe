@@ -22,13 +22,13 @@
 
 
         <Storyboard x:Name="SlideStoryboardBegin">
-            <DoubleAnimation Duration="0:0:0.3"
+            <DoubleAnimation Duration="0:0:0.3" x:Name="SlideDoubleAnimationBegin"
                              Storyboard.TargetName="SlidePlaneProjection"
                              Storyboard.TargetProperty="LocalOffsetX" From="0" To="400" />
         </Storyboard>
 
         <Storyboard x:Name="SlideStoryboardEnd">
-            <DoubleAnimation Duration="0:0:0.3"
+            <DoubleAnimation Duration="0:0:0.3" x:Name="SlideDoubleAnimationEnd"
                              Storyboard.TargetName="SlidePlaneProjection"
                              Storyboard.TargetProperty="LocalOffsetX" From="400" To="0" />
         </Storyboard>
@@ -56,7 +56,7 @@
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot">
-        <Grid Name="LayoutBack" Visibility="Collapsed" Width="400" HorizontalAlignment="Left"
+        <Grid Name="LayoutBack" Visibility="Visible" Width="400" HorizontalAlignment="Left"
               Background="#FF2B579A">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
@@ -109,6 +109,11 @@
         </Grid>
 
         <Grid Name="LayoutFront" Background="#BBBBBC">
+            
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener DragDelta="GestureListener_OnDragDelta" DragCompleted="GestureListener_OnDragCompleted"/>
+            </toolkit:GestureService.GestureListener>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
                 <RowDefinition />
