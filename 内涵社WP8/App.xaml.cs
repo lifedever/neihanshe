@@ -172,6 +172,8 @@ namespace neihanshe
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
+            //指定Mapper为AssociationUriMapper
+            RootFrame.UriMapper = new AssociationUriMapper();
             // 处理导航故障
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 

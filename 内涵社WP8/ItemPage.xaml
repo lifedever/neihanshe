@@ -23,6 +23,7 @@
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="#BBBBBC">
         <Image RenderTransformOrigin="0,0" Visibility="Collapsed"
+               Height="{Binding ArticleItem.PicH}"
                Name="ImgZoom"
                Source="{Binding ArticleItem.PicUrl, Converter={StaticResource ImageConvert}}">
         </Image>
@@ -33,7 +34,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar BackgroundColor="#FF2B579A" Opacity="0.85">
             <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/save.png" Text="保存" Click="Save_btnClick"></shell:ApplicationBarIconButton>
-            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/share.png" Text="分享到微信" Click="WaitShareWeiXin_btnClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/share.png" Text="分享到微信" Click="ShareWeiXin_btnClick"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

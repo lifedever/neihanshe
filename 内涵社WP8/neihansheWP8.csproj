@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AssociationUriMapper.cs" />
     <Compile Include="common\ArticleItem.cs" />
     <Compile Include="common\HtmlHelper.cs" />
     <Compile Include="common\ImageConvert.cs" />

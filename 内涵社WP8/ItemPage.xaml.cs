@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,7 +18,7 @@ namespace neihanshe
 {
     public partial class ItemPage : PhoneApplicationPage, INotifyPropertyChanged
     {
-        public const string APPID = "wxd930ea5d5a258f4f";//sdk_demo的appid
+        public const string APPID = "wx86090f879d05fb3a";//sdk_demo的appid
         public static ArticleItem StaticArticleItem;
         private ArticleItem _articleItem;
 
@@ -66,7 +67,7 @@ namespace neihanshe
             WXImageMessage msg = new WXImageMessage();
             msg.Title = "来自内涵社的图片";
             msg.Description = ArticleItem.Title;
-            msg.ThumbData = readRes(100, 200, 85);
+            msg.ThumbData = readRes(200, 200, 85);
             //图片的byte[]数据
             msg.ImageData = readRes();
 
@@ -116,32 +117,29 @@ namespace neihanshe
 
         private void Save_btnClick(object sender, EventArgs e)
         {
-            MemoryStream ms = new MemoryStream();
+
             try
             {
-                MediaLibrary library = new MediaLibrary();
-                WriteableBitmap bitmap = new WriteableBitmap(ImgZoom.Source as BitmapImage);
-                Extensions.SaveJpeg(bitmap, ms, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
-                ms.Seek(0, SeekOrigin.Begin);
-                ms.Seek(0, SeekOrigin.Current);
-                library.SavePicture(Guid.NewGuid().ToString(), ms);
-                ms.Close();
-                ToastPrompt prompt = new ToastPrompt();
-                prompt.Title = "恭喜！";
-                prompt.Message = "图片保存成功！";
-                prompt.Show();
+                var webClient = new WebClient();
+                webClient.OpenReadAsync(new Uri(ArticleItem.PicUrl, UriKind.Absolute));
+                webClient.OpenReadCompleted += (o, args) =>
+                {
+                    var library = new MediaLibrary();
+                    library.SavePicture("111.jpg", args.Result);
+                    ToastPrompt prompt = new ToastPrompt();
+                    prompt.Title = "恭喜";
+                    prompt.Message = "图片保存成功，请到图片库中查看！";
+                    prompt.Show();
+                };
             }
-            catch
+            catch (Exception exception)
             {
                 ToastPrompt prompt = new ToastPrompt();
-                prompt.Title = "错误！";
+                prompt.Title = "错误";
                 prompt.Message = "图片保存失败！";
                 prompt.Show();
             }
-            finally
-            {
-                ms.Close();
-            }
+
         }
 
         private void WaitShareWeiXin_btnClick(object sender, EventArgs e)
