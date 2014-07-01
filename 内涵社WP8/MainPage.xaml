@@ -70,7 +70,11 @@
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0" Source="Assets/imgs/desktop_portrait.png" Width="60" Margin="10"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left">
+                        <Image.Clip>
+                            <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"></EllipseGeometry>
+                        </Image.Clip>    
+                    </Image>
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                Style="{StaticResource PhoneTextTitle3Style}"
                                Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.ApplicationTitle}" />
@@ -185,7 +189,7 @@
                     <DataTemplate>
                         <Grid Background="#ECECEC" Margin="12">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50" />
+                                <RowDefinition Height="60" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" Margin="9">
@@ -193,12 +197,17 @@
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Image Height="40" Width="40"
+                                <Image Height="50" Width="50"
                                        Stretch="Fill"
                                        Grid.Column="0"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Source="{Binding Uid, Converter={StaticResource UserAvatarConvert}}" />
+                                       Source="{Binding Uid, Converter={StaticResource UserAvatarConvert}}">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="20" RadiusY="20" Center="25,25"></EllipseGeometry>
+                                    </Image.Clip>
+                                    
+                                </Image>
                                 <TextBlock Margin="15 0 0 0"
                                            Grid.Column="1"
                                            HorizontalAlignment="Left"
