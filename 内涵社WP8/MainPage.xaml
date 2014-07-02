@@ -16,7 +16,7 @@
     Loaded="MainPage_OnLoaded"
     shell:SystemTray.BackgroundColor="#FF2B579A"
     Style="{StaticResource TransitionPageStyle}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
     <phone:PhoneApplicationPage.Resources>
 
@@ -111,7 +111,8 @@
         <Grid Name="LayoutFront" Background="#BBBBBC">
             
             <toolkit:GestureService.GestureListener>
-                <toolkit:GestureListener DragDelta="GestureListener_OnDragDelta" DragCompleted="GestureListener_OnDragCompleted"/>
+                <toolkit:GestureListener DragDelta="GestureListener_OnDragDelta" 
+                                         DragCompleted="GestureListener_OnDragCompleted"/>
             </toolkit:GestureService.GestureListener>
             
             <Grid.RowDefinitions>
@@ -300,7 +301,9 @@
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar BackgroundColor="#FF2B579A" Opacity="0.85">
+        <shell:ApplicationBar BackgroundColor="#FF2B579A" 
+                              Opacity="0.85" 
+                              IsVisible="False">
 
 
             <shell:ApplicationBarIconButton IconUri="Assets/Icons/Dark/back.png"

@@ -13,7 +13,7 @@
     mc:Ignorable="d"
     Style="{StaticResource TransitionPageStyle}"
     shell:SystemTray.IsVisible="True">
-
+    
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -44,13 +44,25 @@
                     声明
                 </TextBlock>
                 <TextBlock Style="{StaticResource PhoneTextBlockBase}">
-                    本应用非官方版，仅供大家娱乐交流所用！
+                    <Run>本应用非官方版，仅供大家娱乐交流所用！</Run>
                 </TextBlock>
+                
+                <TextBlock Style="{StaticResource PhoneTextBlockBase}" TextWrapping="Wrap">
+                    由于官方API限制（没有开放API），因此本应用目前只能实现基本的查看功能，无法实现
+                    需要登录的操作，还请大家能够谅解！(*^__^*)
+                </TextBlock>
+
                 <TextBlock Style="{StaticResource PhoneTextSubtleStyle}">
-                    博客
+                    作者博客
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Left" Style="{StaticResource PhoneTextBlockBase}">
                     http://wincn.net
+                </TextBlock>
+                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}">
+                    作者QQ
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" Style="{StaticResource PhoneTextBlockBase}">
+                    99220202
                 </TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1">

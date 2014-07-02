@@ -2,10 +2,13 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Windows.ApplicationModel.Activation;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -28,6 +31,12 @@ namespace neihanshe
         private bool isExit;
         private bool isFull;
 
+        #region 启动画面
+        BackgroundWorker backgroundWorker;
+        Popup popup;
+        #endregion
+
+
         // 构造函数
         public MainPage()
         {
@@ -35,6 +44,15 @@ namespace neihanshe
             {
                 ArticleItems = new ObservableCollection<ArticleItem>();
                 InitializeComponent();
+                popup = new Popup()
+                {
+                    IsOpen = true,
+                    Child = new StartPopup()
+                };
+
+                backgroundWorker = new BackgroundWorker();
+                RunBackgroundWorker();
+
                 MyLongListSelector.DataContext = this;
                 MenuListBox.SelectedIndex = 0;
             }
@@ -42,6 +60,20 @@ namespace neihanshe
             {
                 Console.WriteLine(e);
             }
+        }
+
+        private void RunBackgroundWorker()
+        {
+            backgroundWorker.DoWork += ((s, args) => Thread.Sleep(2 * 1000));
+
+            backgroundWorker.RunWorkerCompleted += ((s, args) => this.Dispatcher.BeginInvoke(() =>
+            {
+                popup.IsOpen = false;
+                SystemTray.IsVisible = true;
+                ApplicationBar.IsVisible = true;
+            }));
+
+            backgroundWorker.RunWorkerAsync();
         }
 
 
@@ -443,7 +475,7 @@ namespace neihanshe
             var img = sender as Image;
 
             cmtUrl = string.Format("http://neihanshe.cn/apps/comment.php?id={0}", img.Tag);
-
+            LayoutFront.IsHitTestVisible = false;
             CmtBrowser_Nav();
             CMTStoryboardBegin.Begin();
         }
@@ -476,6 +508,7 @@ namespace neihanshe
 
         private void UnSildeCmt()
         {
+            LayoutFront.IsHitTestVisible = true;
             MyLongListSelector.IsEnabled = true;
             isCmt = false;
             CMTStoryboardEnd.Begin();
@@ -515,5 +548,7 @@ namespace neihanshe
                 Slide();
             }
         }
+
+        
     }
 }

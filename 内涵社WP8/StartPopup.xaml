@@ -15,7 +15,7 @@
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Opacity="1">
-        <Image Source="SplashScreenImage.jpg" Stretch="Fill" />
+        <Image Source="SplashScreenImage_.jpg" Stretch="Fill" />
     </Grid>
 
 </phone:PhoneApplicationPage>

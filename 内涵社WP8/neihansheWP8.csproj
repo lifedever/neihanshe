@@ -280,7 +280,7 @@
     <Content Include="desktop_portrait.png" />
     <Content Include="logo.png" />
     <Content Include="README_FIRST.txt" />
-    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="SplashScreenImage_.jpg" />
     <None Include="Resources\Headshot.png" />
     <None Include="Resources\art_default_headshot.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
